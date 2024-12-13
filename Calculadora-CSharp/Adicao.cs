@@ -8,7 +8,7 @@ namespace Calculadora_CSharp;
 
 public class Adicao
 {
-    public int SomarAdicao(int numeroA, int numeroB)
+    public double SomarAdicao(double numeroA, double numeroB)
     {
         return numeroA + numeroB;
     }
