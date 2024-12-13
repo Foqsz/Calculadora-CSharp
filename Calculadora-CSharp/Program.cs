@@ -6,6 +6,14 @@ class Program
 {
     static void Main(string[] args)
     {
+        var opcaoSoma = Menu();
+
+        Calculadora(opcaoSoma);
+    }
+
+    #region Menu
+    private static int Menu()
+    {
         Console.WriteLine("## Calculadora C# - Feita por Victor Vinicius ##");
         Console.WriteLine("[1] - Adição\n[2] - Subtração\n[3] - Multiplicação\n[4] - Divisão\n[5] - Sair");
         Console.Write("## Qual forma deseja somar?:  ");
@@ -22,15 +30,20 @@ class Program
             Console.WriteLine("Opcção Inválida.");
         }
 
-        switch (opcaoSoma)
+        return opcaoSoma;
+    }
+    #endregion
+
+    #region Calculadora
+    private static void Calculadora(int opcaoOperacao)
+    {
+        switch (opcaoOperacao)
         {
             case 1:
                 {
                     var somarAdicao = new Adicao();
 
-                    Console.Write("Digite os números para somar (separados por espaço): ");
-                    string numerosSoma = Console.ReadLine();
-                    string[] nums = numerosSoma.Split(' ');
+                    var nums = leituraNumeros();
 
                     if (nums.Length == 2 &&
                         int.TryParse(nums[0], out int numeroA) &&
@@ -51,9 +64,7 @@ class Program
                 {
                     var somarSubtracao = new Subtracao();
 
-                    Console.Write("Digite os números para soma: ");
-                    string numerosSoma = Console.ReadLine();
-                    string[] nums = numerosSoma.Split(' ');
+                    var nums = leituraNumeros();
 
                     if (nums.Length == 2 &&
                         int.TryParse(nums[0], out int numeroA) &&
@@ -73,9 +84,7 @@ class Program
                 {
                     var somarMultiplicacao = new Multiplicacao();
 
-                    Console.Write("Digite os números para soma: ");
-                    string numerosSoma = Console.ReadLine();
-                    string[] nums = numerosSoma.Split(' ');
+                    var nums = leituraNumeros();
 
                     if (nums.Length == 2 &&
                         int.TryParse(nums[0], out int numeroA) &&
@@ -88,19 +97,54 @@ class Program
                     {
                         Duplicado();
                     }
-
                     break;
                 }
+            case 4:
+                {
+                    var somarDivisao = new Divisao();
+
+                    var nums = leituraNumeros();
+
+                    if (nums.Length == 2 &&
+                        int.TryParse(nums[0], out int numeroA) &&
+                        int.TryParse(nums[1], out int numeroB))
+                    {
+                        var result = somarDivisao.SomarDivisao(numeroA, numeroB);
+                        ResultadoSoma(numeroA, numeroB, result);
+                    }
+                    else
+                    {
+                        Duplicado();
+                    }
+                    break;
+                }
+                break;
         }
     }
+    #endregion
 
+    #region Leitura dos Numeros
+    private static string[] leituraNumeros()
+    {
+        Console.Write("Digite os números para soma: ");
+        string numerosSoma = Console.ReadLine();
+        string[] nums = numerosSoma.Split(' ');
+        return nums;
+    }
+    #endregion
+
+    #region String de Resultado
     private static void ResultadoSoma(double numeroA, double numeroB, double result)
     {
-        Console.WriteLine($"# Resultado da sua soma {numeroA} + {numeroB}: {result}");
+        Console.WriteLine($"# Resultado da sua soma dos números {numeroA} e {numeroB}: {result}");
     }
+    #endregion
 
+    #region String de Erro 
     private static void Duplicado()
     {
         Console.WriteLine("Entrada inválida. Certifique-se de digitar dois números inteiros.");
     }
+
+    #endregion 
 }
