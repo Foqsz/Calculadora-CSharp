@@ -37,91 +37,128 @@ class Program
     #region Calculadora
     private static void Calculadora(int opcaoOperacao)
     {
-        switch (opcaoOperacao)
+        bool continuar = true;
+
+        while (continuar)
         {
-            case 1:
-                {
-                    var somarAdicao = new Adicao();
-
-                    var nums = leituraNumeros();
-
-                    if (nums.Length == 2 &&
-                        int.TryParse(nums[0], out int numeroA) &&
-                        int.TryParse(nums[1], out int numeroB))
+            switch (opcaoOperacao)
+            {
+                case 1:
                     {
-                        var result = somarAdicao.SomarAdicao(numeroA, numeroB);
-                        ResultadoSoma(numeroA, numeroB, result);
-                    }
-                    else
-                    {
-                        Duplicado();
+                        var somarAdicao = new Adicao();
+
+                        var nums = leituraNumeros();
+
+                        if (nums.Length == 2 &&
+                            int.TryParse(nums[0], out int numeroA) &&
+                            int.TryParse(nums[1], out int numeroB))
+                        {
+                            var result = somarAdicao.SomarAdicao(numeroA, numeroB);
+                            ResultadoSoma(numeroA, numeroB, result);
+                        }
+                        else
+                        {
+                            Duplicado();
+                        }
+
+                        continuar = ContinuarCalculadora(continuar);
+
+                        break;
                     }
 
+                case 2:
+                    {
+                        var somarSubtracao = new Subtracao();
+
+                        var nums = leituraNumeros();
+
+                        if (nums.Length == 2 &&
+                            int.TryParse(nums[0], out int numeroA) &&
+                            int.TryParse(nums[1], out int numeroB))
+                        {
+                            var result = somarSubtracao.SomarSubtracao(numeroA, numeroB);
+                            ResultadoSoma(numeroA, numeroB, result);
+                        }
+                        else
+                        {
+                            Duplicado();
+                        }
+
+                        continuar = ContinuarCalculadora(continuar);
+
+                        break;
+                    }
+                case 3:
+                    {
+                        var somarMultiplicacao = new Multiplicacao();
+
+                        var nums = leituraNumeros();
+
+                        if (nums.Length == 2 &&
+                            int.TryParse(nums[0], out int numeroA) &&
+                            int.TryParse(nums[1], out int numeroB))
+                        {
+                            var result = somarMultiplicacao.SomarMultiplicacao(numeroA, numeroB);
+                            ResultadoSoma(numeroA, numeroB, result);
+                        }
+                        else
+                        {
+                            Duplicado();
+                        }
+
+                        continuar = ContinuarCalculadora(continuar);
+
+                        break;
+                    }
+                case 4:
+                    {
+                        var somarDivisao = new Divisao();
+
+                        var nums = leituraNumeros();
+
+                        if (nums.Length == 2 &&
+                            int.TryParse(nums[0], out int numeroA) &&
+                            int.TryParse(nums[1], out int numeroB))
+                        {
+                            var result = somarDivisao.SomarDivisao(numeroA, numeroB);
+                            ResultadoSoma(numeroA, numeroB, result);
+                        }
+                        else
+                        {
+                            Duplicado();
+                        }
+
+                        continuar = ContinuarCalculadora(continuar);
+
+                        break;
+                    }
                     break;
-                }
+            }
 
-            case 2:
-                {
-                    var somarSubtracao = new Subtracao();
-
-                    var nums = leituraNumeros();
-
-                    if (nums.Length == 2 &&
-                        int.TryParse(nums[0], out int numeroA) &&
-                        int.TryParse(nums[1], out int numeroB))
-                    {
-                        var result = somarSubtracao.SomarSubtracao(numeroA, numeroB);
-                        ResultadoSoma(numeroA, numeroB, result);
-                    }
-                    else
-                    {
-                        Duplicado();
-                    }
-
-                    break;
-                }
-            case 3:
-                {
-                    var somarMultiplicacao = new Multiplicacao();
-
-                    var nums = leituraNumeros();
-
-                    if (nums.Length == 2 &&
-                        int.TryParse(nums[0], out int numeroA) &&
-                        int.TryParse(nums[1], out int numeroB))
-                    {
-                        var result = somarMultiplicacao.SomarMultiplicacao(numeroA, numeroB);
-                        ResultadoSoma(numeroA, numeroB, result);
-                    }
-                    else
-                    {
-                        Duplicado();
-                    }
-                    break;
-                }
-            case 4:
-                {
-                    var somarDivisao = new Divisao();
-
-                    var nums = leituraNumeros();
-
-                    if (nums.Length == 2 &&
-                        int.TryParse(nums[0], out int numeroA) &&
-                        int.TryParse(nums[1], out int numeroB))
-                    {
-                        var result = somarDivisao.SomarDivisao(numeroA, numeroB);
-                        ResultadoSoma(numeroA, numeroB, result);
-                    }
-                    else
-                    {
-                        Duplicado();
-                    }
-                    break;
-                }
-                break;
+            if (continuar)
+            {
+                opcaoOperacao = Menu();
+            }
         }
     }
+
     #endregion
+
+    private static bool ContinuarCalculadora(bool continuar)
+    {
+        Console.Write("Deseja fazer outra operação? Sim / Não: ");
+        string resposta = Console.ReadLine();
+
+        if (resposta.Equals("sim", StringComparison.OrdinalIgnoreCase))
+        {
+            return true; // continua no loop
+        }
+        else
+        {
+            return false; // sai do loop
+        }
+    }
+
 
     #region Leitura dos Numeros
     private static string[] leituraNumeros()
