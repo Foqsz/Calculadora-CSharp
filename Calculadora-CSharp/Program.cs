@@ -144,21 +144,15 @@ class Program
 
     #endregion
 
+    #region Continuar Calculando
     private static bool ContinuarCalculadora(bool continuar)
     {
         Console.Write("Deseja fazer outra operação? Sim / Não: ");
         string resposta = Console.ReadLine();
 
-        if (resposta.Equals("sim", StringComparison.OrdinalIgnoreCase))
-        {
-            return true; // continua no loop
-        }
-        else
-        {
-            return false; // sai do loop
-        }
+        return resposta.Equals("sim", StringComparison.OrdinalIgnoreCase); 
     }
-
+    #endregion
 
     #region Leitura dos Numeros
     private static string[] leituraNumeros()
